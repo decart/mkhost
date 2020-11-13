@@ -1,4 +1,5 @@
 import os
+import re
 
 from settings import Settings
 from prompt_vhost import prompt_vhost
@@ -41,6 +42,25 @@ def create_vhost(conf):
     print('\n')
     print(colored('✔ SUCCESS: vhost config file created!', 'green'))
 
+    return data['vhost']
+
+
+def update_hosts(vhost):
+    hosts_raw = ''
+    with open('/etc/hosts', 'r') as f:
+        hosts_raw  = f.read()
+
+    res = re.findall(r'127\.0\.0\.1\s+' + vhost, hosts_raw)
+    
+    if len(res) > 0:
+        print(colored('✔ INFO: vhost already in hosts', 'blue'))
+        return
+    
+    with open('/etc/hosts', 'a') as f:
+        f.write('\n127.0.0.1\t' + vhost)
+
+    print(colored('✔ SUCCESS: vhost added to /etc/hosts', 'green'))
+
 
 def main():
     colorama.init()
@@ -55,7 +75,8 @@ def main():
         )
         return
 
-    create_vhost(conf)
+    vhost = create_vhost(conf)
+    update_hosts(vhost)
 
     print('\n')
 
