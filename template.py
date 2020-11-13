@@ -1,8 +1,11 @@
+import os
+
 class Template:
     """Generate string from template"""
 
     def __init__(self, template):
-        self.template = template
+        cur_dir = os.path.dirname(os.path.realpath(__file__))
+        self.template = cur_dir + '/' + template
         self.vars = []
 
     def addVar(self, variable_name, value):

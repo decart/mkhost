@@ -1,3 +1,4 @@
+import os
 import configparser
 
 class Settings:
@@ -6,8 +7,9 @@ class Settings:
     def __init__(self):
         """Constructor"""
 
+        cur_dir = os.path.dirname(os.path.realpath(__file__))
         self.config = configparser.ConfigParser()
-        self.config.read('settings.ini')
+        self.config.read(cur_dir + '/settings.ini')
 
     def getVHosts(self):
         vhosts_dir = str(self.config['nginx']['vhosts'])
