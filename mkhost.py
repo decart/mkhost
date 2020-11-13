@@ -6,6 +6,7 @@ from template import Template
 
 import colorama
 from termcolor import colored
+from pyfiglet import figlet_format
 
 def create_vhost(conf):
     """
@@ -37,18 +38,26 @@ def create_vhost(conf):
     with open(vhost_file_name, 'w') as f:
         f.write(result)
 
-    print('✔ SUCCESS: vhost config file created!')
+    print('\n')
+    print(colored('✔ SUCCESS: vhost config file created!', 'green'))
 
 
 def main():
     colorama.init()
     conf = Settings()
 
+    print(colored(figlet_format('mkhost'), 'blue'))
+
     if not os.access(conf.getVHosts(), os.W_OK):
-        print('ERROR: Directory of nginx vhosts is not writable (' + conf.getVHosts() + ')')
+        print(
+            colored('ERROR: Directory of nginx vhosts is not writable (' + 
+                conf.getVHosts() + ')', 'red')
+        )
         return
 
     create_vhost(conf)
+
+    print('\n')
 
 if __name__ == "__main__":
     main()
