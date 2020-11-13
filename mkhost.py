@@ -14,6 +14,9 @@ def create_vhost(conf):
     Create a virtual host for nginx and php-fpm
     """
 
+    # TODO: Check a vhost already exist
+    # nginx -T | grep "server_name "
+
     data = prompt_vhost(conf.getCertPath(), conf.getCertKey(), conf.getRootDir())
     
     http = Template('templates/vhost-http.conf')
