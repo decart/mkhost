@@ -1,5 +1,9 @@
 import os
 import re
+import pkg_resources
+import sys
+
+from pyimod03_importers import FrozenImporter
 
 from settings import Settings
 from prompt_vhost import prompt_vhost
@@ -8,6 +12,12 @@ from template import Template
 import colorama
 from termcolor import colored
 from pyfiglet import figlet_format
+
+# Fix for pyinstaller
+if getattr(sys, 'frozen', False):
+   pkg_resources.register_loader_type(
+       FrozenImporter, pkg_resources.DefaultProvider
+   )
 
 def create_vhost(conf):
     """
