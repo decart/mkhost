@@ -3,5 +3,7 @@
 __pycache__/
 lib/
 bin/
+build/
+dist/
 pyvenv.cfg
 settings.ini
