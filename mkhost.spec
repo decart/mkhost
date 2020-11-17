@@ -5,7 +5,7 @@ block_cipher = None
 
 pf_datas, pf_binaries, pf_hiddenimports = collect_all("pyfiglet")
 
-a = Analysis(['mkhost.py'],
+a = Analysis(['installer.py'],
              pathex=['/home/mansur/data/python/local-http'],
              binaries=pf_binaries+[],
              datas=pf_datas+[('settings.ini', '.'), ('templates/vhost-ssl.conf', 'templates'), ('templates/vhost-http.conf', 'templates')],
